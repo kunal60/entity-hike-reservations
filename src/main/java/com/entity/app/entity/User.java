@@ -9,9 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,7 +21,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "customer_id")
-    private Long id;
+    private Long customerId;
 
     private String firstName;
 
@@ -30,6 +29,8 @@ public class User {
 
     private String email;
 
-    @OneToMany(mappedBy = "user")
-    private List<Booking> reservations;
+    private int age;
+
+    @ManyToOne
+    private Hike hike;
 }
