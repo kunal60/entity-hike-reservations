@@ -1,6 +1,6 @@
 package com.entity.app;
 
-import com.entity.app.model.data.Hikes;
+import com.entity.app.model.Hikes;
 import com.entity.app.service.HikeService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
