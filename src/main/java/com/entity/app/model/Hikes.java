@@ -1,4 +1,4 @@
-package com.entity.app.model.data;
+package com.entity.app.model;
 
 import com.entity.app.entity.Hike;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.entity.app.model.data;
+package com.entity.app.model;
 
 /**
  * @author Kunal Malhotra

@@ -1,6 +1,6 @@
 package com.entity.app.entity;
 
-import com.entity.app.model.data.Constants;
+import com.entity.app.model.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
