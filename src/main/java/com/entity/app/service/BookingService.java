@@ -1,6 +1,7 @@
 package com.entity.app.service;
 
 
+import com.entity.app.entity.Hike;
 import com.entity.app.entity.User;
 import org.springframework.data.domain.Page;
 
@@ -15,7 +16,7 @@ public interface BookingService {
     public abstract User getBookingById(Long passengerId);
 
 
-    public abstract List<User> saveAllBookins(List<User> passengers);
+    public abstract List<User> saveAllBookins(List<User> passengers, Hike hike);
 
     public abstract void deleteBookingById(Long pnrId);
 }

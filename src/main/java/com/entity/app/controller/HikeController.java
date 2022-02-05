@@ -58,7 +58,7 @@ public class HikeController {
         Optional<Hike> flight = hikeService.getHike(hikeId);
         if (flight.isPresent()) {
             users.forEach(passenger -> passenger.setHike(flight.get()));
-            bookingService.saveAllBookins(users);
+            bookingService.saveAllBookins(users,flight.get());
             return new ResponseEntity<>(users, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,5 +1,6 @@
 package com.entity.app.service.impl;
 
+import com.entity.app.entity.Hike;
 import com.entity.app.entity.User;
 import com.entity.app.repository.UserRepository;
 import com.entity.app.service.BookingService;
@@ -37,14 +38,20 @@ public class BookingServiceImpl implements BookingService {
     }
 
 
-
     @Override
-    public List<User> saveAllBookins(List<User> passengers) {
-        return userRepository.saveAll(passengers);
+    public List<User> saveAllBookins(List<User> passengers, Hike hike) {
+        if (isValidAge(passengers, hike)) {
+            return userRepository.saveAll(passengers);
+        } else throw new RuntimeException("Cannot saving user bookings due to Invalid Age");
+
     }
 
     @Override
     public void deleteBookingById(Long passengerId) {
         userRepository.deleteById(passengerId);
+    }
+
+    boolean isValidAge(List<User> passengers, Hike hike) {
+        return passengers.stream().allMatch(row -> row.getAge() >= hike.getMinimumAge() && row.getAge() <= hike.getMaximumAge());
     }
 }
