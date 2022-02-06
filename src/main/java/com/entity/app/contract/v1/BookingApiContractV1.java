@@ -7,6 +7,7 @@ import com.entity.app.entity.Trail;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Kunal Malhotra
@@ -45,7 +46,7 @@ public interface BookingApiContractV1 {
             @ApiResponse(responseCode = "201", description = "Created: new booking was added"),
             @ApiResponse(responseCode = "400", description = "Bad request: new booking was not added")})
     @PostMapping(value = "/booking", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Booking>> bookTrail(@RequestBody @Valid List<BookingDto> bookingsDto, @RequestParam("hikeId") Long hikeId);
+    public ResponseEntity<List<Booking>> bookTrail(@RequestBody @Valid List<BookingDto> bookingsDto, @RequestParam("trailId") Long trailId, @RequestParam("eventDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate eventDate);
 
 
     @Operation(summary = "View booking for a given UUID", responses = {

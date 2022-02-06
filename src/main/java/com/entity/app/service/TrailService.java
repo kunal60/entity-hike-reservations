@@ -10,5 +10,5 @@ public interface TrailService {
 
     List<Trail> getTrails();
 
-    Trail findTrailById(Long uuid);
+    Trail findTrailById(Long trailId);
 }

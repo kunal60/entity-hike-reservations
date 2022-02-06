@@ -4,7 +4,6 @@ import com.entity.app.model.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
@@ -14,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -52,17 +51,12 @@ public class Booking {
     private Integer age;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date bookingDate;
+    private LocalDate bookingDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date eventDate;
+    private LocalDate eventDate;
 
-    /**
-     * Holds value of property active
-     */
-    @Column(name = "active", nullable = false)
-    @Type(type = "yes_no")
-    private Boolean active = Boolean.TRUE;
+    private String status;
 
     @ManyToOne
     private Trail trail;

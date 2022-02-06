@@ -35,10 +35,10 @@ public class TrailServiceImpl implements TrailService {
 
     @Override
     @Transactional(readOnly = true)
-    public Trail findTrailById(Long uuid) {
-        Optional<Trail> booking = trailRepository.findById(uuid);
+    public Trail findTrailById(Long trailId) {
+        Optional<Trail> booking = trailRepository.findById(trailId);
         if (booking.isEmpty()) {
-            throw new TrailNotAvailableException(String.format("Trail was not found for uuid=%s", uuid));
+            throw new TrailNotAvailableException(String.format("Trail was not found for uuid=%s", trailId));
         }
         return booking.get();
     }

@@ -4,7 +4,7 @@ package com.entity.app.exception.advice;
 import com.entity.app.contract.v1.model.ApiError;
 import com.entity.app.exception.AgeNotValidException;
 import com.entity.app.exception.BookingNotFoundException;
-import com.entity.app.exception.IllegalBookingStateException;
+import com.entity.app.exception.BookingInvalidDateException;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.StaleObjectStateException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -43,7 +43,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(apiError);
     }
 
-    @ExceptionHandler({IllegalBookingStateException.class,
+    @ExceptionHandler({BookingInvalidDateException.class,
             AgeNotValidException.class,
             IllegalArgumentException.class})
     protected ResponseEntity<Object> handleBookingDatesNotAvailable(RuntimeException ex) {
