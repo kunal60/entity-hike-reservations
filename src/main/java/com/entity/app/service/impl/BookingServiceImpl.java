@@ -5,6 +5,7 @@ import com.entity.app.entity.Booking;
 import com.entity.app.entity.Trail;
 import com.entity.app.exception.AgeNotValidException;
 import com.entity.app.exception.BookingInvalidDateException;
+import com.entity.app.exception.BookingNotFoundException;
 import com.entity.app.model.Status;
 import com.entity.app.model.mapper.BookingMapper;
 import com.entity.app.repository.BookingRepository;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +28,11 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional(readOnly = true)
     public Booking findBookingById(Long bookingId) {
-        return bookingRepository.findById(bookingId).orElse(null);
+        Optional<Booking> bookingData = Optional.ofNullable(bookingRepository.findById(bookingId).orElse(null));
+        if (bookingData.isPresent()) {
+            return bookingData.get();
+        }
+        throw new BookingNotFoundException(String.format("Booking not found for bookingId %d", bookingData));
     }
 
 

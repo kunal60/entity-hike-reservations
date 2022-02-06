@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Kunal Malhotra
@@ -46,22 +45,13 @@ public class BookingController implements BookingApiContractV1 {
 
     @Override
     public ResponseEntity<Booking> getBookingById(Long bookingId) {
-        Optional<Booking> bookingData = Optional.ofNullable(bookingService.findBookingById(bookingId));
-        if (bookingData.isPresent()) {
-            return new ResponseEntity<>(bookingData.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(bookingService.findBookingById(bookingId), HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Booking> cancelBooking(Long bookingId) {
-        try {
-            Booking booking = bookingService.cancelBooking(bookingId);
-            return new ResponseEntity<>(booking, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<>(bookingService.cancelBooking(bookingId), HttpStatus.OK);
+
     }
 
 
