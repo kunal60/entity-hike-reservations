@@ -61,6 +61,6 @@ public interface BookingApiContractV1 {
             @ApiResponse(responseCode = "400", description = "Bad request: existing booking was not updated"),
             @ApiResponse(responseCode = "404", description = "Not found: booking for a given UUID does not exist")})
     @DeleteMapping(value = "/booking/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> cancelBooking(@PathVariable("uuid") Long uuid);
+    public ResponseEntity<Booking> cancelBooking(@PathVariable("uuid") Long uuid);
 
 }

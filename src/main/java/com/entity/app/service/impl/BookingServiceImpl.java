@@ -52,11 +52,11 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional
-    public boolean cancelBooking(Long uuid) {
+    public Booking cancelBooking(Long uuid) {
         Booking booking = findBookingById(uuid);
         booking.setStatus(Status.CANCELLED.name());
         booking = bookingRepository.save(booking);
-        return booking.getStatus().equals(Status.CANCELLED.name());
+        return booking;
     }
 
     void validateAge(List<BookingDto> bookingsDto, Trail trail) {

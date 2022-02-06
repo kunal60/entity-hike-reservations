@@ -26,7 +26,7 @@ public class Booking {
      * Holds value of property id.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "booking_id")
     private Long customerId;
     /**

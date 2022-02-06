@@ -3,8 +3,9 @@ package com.entity.app.exception.advice;
 
 import com.entity.app.contract.v1.model.ApiError;
 import com.entity.app.exception.AgeNotValidException;
-import com.entity.app.exception.BookingNotFoundException;
 import com.entity.app.exception.BookingInvalidDateException;
+import com.entity.app.exception.BookingNotFoundException;
+import com.entity.app.exception.TrailNotAvailableException;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.StaleObjectStateException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -34,6 +35,17 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BookingNotFoundException.class)
     protected ResponseEntity<Object> handleBookingNotFound(BookingNotFoundException ex) {
+
+        var apiError = ApiError.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.NOT_FOUND)
+                .message(ex.getMessage())
+                .build();
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(TrailNotAvailableException.class)
+    protected ResponseEntity<Object> handleTrailNotFound(TrailNotAvailableException ex) {
 
         var apiError = ApiError.builder()
                 .timestamp(LocalDateTime.now())

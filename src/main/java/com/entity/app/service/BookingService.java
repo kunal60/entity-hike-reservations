@@ -17,5 +17,5 @@ public interface BookingService {
 
     List<Booking> createBookings(List<BookingDto> bookingsDto, Trail trail, LocalDate eventDate);
 
-    boolean cancelBooking(Long uuid);
+    Booking cancelBooking(Long uuid);
 }
