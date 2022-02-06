@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = Constants.HIKE_TABLE_NAME)
-public class Hike {
+public class Trail {
 
     @Id
     @Column(name = "trail_id")

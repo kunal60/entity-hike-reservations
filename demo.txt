@@ -1,1 +1,5 @@
 https://towardsdatascience.com/how-to-run-postgresql-and-pgadmin-using-docker-3a6a8ae918b5
+
+In pgadmin:
+create server:
+put hostname as: pg_container

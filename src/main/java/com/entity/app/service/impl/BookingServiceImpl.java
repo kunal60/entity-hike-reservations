@@ -1,57 +1,48 @@
 package com.entity.app.service.impl;
 
-import com.entity.app.entity.Hike;
-import com.entity.app.entity.User;
-import com.entity.app.repository.UserRepository;
+import com.entity.app.entity.Booking;
+import com.entity.app.entity.Trail;
+import com.entity.app.exception.AgeNotValidException;
+import com.entity.app.repository.BookingRepository;
 import com.entity.app.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class BookingServiceImpl implements BookingService {
 
-    private UserRepository userRepository;
-
     @Autowired
-    public BookingServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private BookingRepository bookingRepository;
 
     @Override
-    public Page<User> getAllPassengersPaged(int pageNum) {
-        return userRepository.findAll(PageRequest.of(pageNum, 5, Sort.by("lastName")));
-    }
-
-    @Override
-    public List<User> getAllPassengers() {
-        return userRepository.findAll();
-    }
-
-    @Override
-    public User getBookingById(Long passengerId) {
-        return userRepository.findById(passengerId).orElse(null);
+    @Transactional(readOnly = true)
+    public Booking findBookingById(Long uuid) {
+        return bookingRepository.findById(uuid).orElse(null);
     }
 
 
     @Override
-    public List<User> saveAllBookins(List<User> passengers, Hike hike) {
-        if (isValidAge(passengers, hike)) {
-            return userRepository.saveAll(passengers);
-        } else throw new RuntimeException("Cannot saving user bookings due to Invalid Age");
+    @Transactional
+    public List<Booking> createBookings(List<Booking> passengers, Trail trail) {
+        if (isValidAge(passengers, trail)) {
+            return bookingRepository.saveAll(passengers);
+        } else throw new AgeNotValidException("Cannot saving user bookings due to Invalid Age");
 
     }
 
     @Override
-    public void deleteBookingById(Long passengerId) {
-        userRepository.deleteById(passengerId);
+    @Transactional
+    public boolean cancelBooking(Long uuid) {
+        var booking = findBookingById(uuid);
+        booking.setActive(false);
+        booking = bookingRepository.save(booking);
+        return !booking.getActive();
     }
 
-    boolean isValidAge(List<User> passengers, Hike hike) {
-        return passengers.stream().allMatch(row -> row.getAge() >= hike.getMinimumAge() && row.getAge() <= hike.getMaximumAge());
+    boolean isValidAge(List<Booking> passengers, Trail trail) {
+        return passengers.stream().allMatch(row -> row.getAge() >= trail.getMinimumAge() && row.getAge() <= trail.getMaximumAge());
     }
 }

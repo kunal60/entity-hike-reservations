@@ -1,1 +1,1 @@
-# entity-hike-reservations
+# entity-trail-reservations

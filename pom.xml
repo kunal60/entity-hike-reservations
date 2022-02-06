@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.entity</groupId>
-    <artifactId>entity-hike-reservations</artifactId>
+    <artifactId>entity-trail-reservations</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>entity-hike-reservations</name>
+    <name>entity-trail-reservations</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
@@ -41,6 +41,24 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.4.2.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>1.4.2.Final</version>
+            <optional>true</optional>
+        </dependency>
 
 
     </dependencies>
@@ -60,6 +78,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>entity-hike-reservations</finalName>
+        <finalName>entity-trail-reservations</finalName>
     </build>
 </project>

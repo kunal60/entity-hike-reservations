@@ -1,7 +1,7 @@
 package com.entity.app;
 
-import com.entity.app.model.Hikes;
-import com.entity.app.service.HikeService;
+import com.entity.app.model.Trails;
+import com.entity.app.service.TrailService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,44 +20,43 @@ public class ApplicationStarter {
     private Jackson2ObjectMapperBuilder builder;
 
     @Autowired
-    HikeService hikeService;
+    TrailService trailServiceImpl;
 
     /**
      * This method is called on Application Startup
      */
     @PostConstruct
     public void init() {
-        Hikes hikes = readJsonFile();
-        loadHikesInDB(hikes);
+        Trails trails = readJsonFile();
+        loadTrailsInDB(trails);
     }
 
     /**
-     * Reads Json File on Application StratUp
+     * Reads Json File on Application StartUp
      *
      * @return
      */
-    private Hikes readJsonFile() {
+    private Trails readJsonFile() {
         ObjectMapper mapper = builder.build();
-        TypeReference<Hikes> typeReference = new TypeReference<>() {
+        TypeReference<Trails> typeReference = new TypeReference<>() {
         };
         InputStream inputStream = TypeReference.class.getResourceAsStream("/dataset.json");
-        Hikes hikes = new Hikes();
+        Trails trails = new Trails();
         try {
-            hikes = mapper.readValue(inputStream, typeReference);
+            trails = mapper.readValue(inputStream, typeReference);
         } catch (IOException e) {
-
             e.printStackTrace();
         }
-        return hikes;
+        return trails;
     }
 
     /**
-     * Stores hike Data in DB
+     * Stores Trail's Data in DB
      *
-     * @param hikes
+     * @param trails
      */
-    private void loadHikesInDB(Hikes hikes) {
-        hikeService.createHike(hikes.getHikes());
+    private void loadTrailsInDB(Trails trails) {
+        trailServiceImpl.saveTrails(trails.getTrails());
     }
 
     public static void main(String[] args) {

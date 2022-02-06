@@ -1,6 +1,6 @@
 package com.entity.app.model;
 
-import com.entity.app.entity.Hike;
+import com.entity.app.entity.Trail;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +14,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Hikes {
-    private List<Hike> hikes = new ArrayList<>();
+public class Trails {
+    private List<Trail> trails = new ArrayList<>();
 }

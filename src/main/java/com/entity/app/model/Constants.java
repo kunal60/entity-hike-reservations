@@ -9,6 +9,7 @@ public final class Constants {
         //sonar Fix
     }
 
-    public static final String HIKE_TABLE_NAME = "HIKE_DATA";
+    public static final String HIKE_TABLE_NAME = "TRAIL_DATA";
+    public static final String BOOKING_TABLE_NAME = "BOOKINGS";
 
 }

@@ -1,22 +1,19 @@
 package com.entity.app.service;
 
 
-import com.entity.app.entity.Hike;
-import com.entity.app.entity.User;
-import org.springframework.data.domain.Page;
+import com.entity.app.entity.Booking;
+import com.entity.app.entity.Trail;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface BookingService {
 
-    public Page<User> getAllPassengersPaged(int pageNum);
 
-    public abstract List<User> getAllPassengers();
-
-    public abstract User getBookingById(Long passengerId);
+    Booking findBookingById(Long uuid);
 
 
-    public abstract List<User> saveAllBookins(List<User> passengers, Hike hike);
+    List<Booking> createBookings(List<Booking> passengers, Trail trail);
 
-    public abstract void deleteBookingById(Long pnrId);
+    boolean cancelBooking(Long uuid);
 }
