@@ -32,7 +32,7 @@ public class BookingServiceImpl implements BookingService {
         if (bookingData.isPresent()) {
             return bookingData.get();
         }
-        throw new BookingNotFoundException(String.format("Booking not found for bookingId %d", bookingData));
+        throw new BookingNotFoundException(String.format("Booking not found for bookingId %d", bookingData.get()));
     }
 
 
@@ -40,7 +40,7 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public List<Booking> createBookings(List<BookingDto> bookingsDto, Trail trail, LocalDate eventDate) {
         if (!isValidEventDate(eventDate)) {
-            throw new BookingInvalidDateException("Event date should be in this format 2022-02-25 and should be with in the date range within next day and next 30 days");
+            throw new BookingInvalidDateException("Booking cancelled because event date should be in this format 2022-02-25 and should be with in the date range within next day and next 30 days");
         }
         validateAge(bookingsDto, trail);
         List<Booking> bookings = bookingsDto.stream().map(b -> BookingMapper.INSTANCE.toBooking(b)).collect(Collectors.toList());
@@ -69,7 +69,7 @@ public class BookingServiceImpl implements BookingService {
         bookingsDto.forEach(booking ->
         {
             if (booking.getAge() < trail.getMinimumAge() || booking.getAge() > trail.getMaximumAge()) {
-                throw new AgeNotValidException("Age of user is not permitted for trail:" + booking.getFirstName().concat(booking.getLastName()));
+                throw new AgeNotValidException(String.format("Booking cancelled because of %s age)", booking.getFirstName() + " " + booking.getLastName() + "'s"));
             }
         });
 
