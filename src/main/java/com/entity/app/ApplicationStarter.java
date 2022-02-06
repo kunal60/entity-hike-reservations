@@ -13,6 +13,9 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * @author Kunal Malhotra
+ */
 @SpringBootApplication
 public class ApplicationStarter {
 

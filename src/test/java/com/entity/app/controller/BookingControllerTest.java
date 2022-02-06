@@ -21,6 +21,9 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
+/**
+ * @author Kunal Malhotra
+ */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 class BookingControllerTest {

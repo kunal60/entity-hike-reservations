@@ -9,7 +9,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -22,9 +21,6 @@ import java.time.LocalDate;
 @Table(name = Constants.BOOKING_TABLE_NAME)
 public class Booking {
 
-    /**
-     * Holds value of property id.
-     */
     @Id
     @GeneratedValue
     @Column(name = "booking_id")
