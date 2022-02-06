@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -38,8 +37,8 @@ public class BookingController implements BookingApiContractV1 {
 
     @Override
     public ResponseEntity<List<Booking>> bookTrail(List<BookingDto> bookingsDto, Long trailId, LocalDate eventDate) {
-        Trail flight = trailService.findTrailById(trailId);
-        return new ResponseEntity<>(bookingService.createBookings(bookingsDto, flight, eventDate), HttpStatus.OK);
+        Trail trail = trailService.findTrailById(trailId);
+        return new ResponseEntity<>(bookingService.createBookings(bookingsDto, trail, eventDate), HttpStatus.OK);
     }
 
     @Override
@@ -53,10 +52,10 @@ public class BookingController implements BookingApiContractV1 {
     }
 
     @Override
-    public ResponseEntity<HttpStatus> cancelBooking(Long uuid) {
+    public ResponseEntity<Booking> cancelBooking(Long uuid) {
         try {
-            bookingService.cancelBooking(uuid);
-            return new ResponseEntity<>(HttpStatus.OK);
+            Booking booking = bookingService.cancelBooking(uuid);
+            return new ResponseEntity<>(booking, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
