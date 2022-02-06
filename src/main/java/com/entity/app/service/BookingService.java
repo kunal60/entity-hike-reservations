@@ -7,15 +7,14 @@ import com.entity.app.entity.Trail;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 public interface BookingService {
 
 
-    Booking findBookingById(Long uuid);
+    Booking findBookingById(Long bookingId);
 
 
     List<Booking> createBookings(List<BookingDto> bookingsDto, Trail trail, LocalDate eventDate);
 
-    Booking cancelBooking(Long uuid);
+    Booking cancelBooking(Long bookingId);
 }

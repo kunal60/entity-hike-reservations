@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,18 +48,18 @@ public interface BookingApiContractV1 {
     public ResponseEntity<List<Booking>> bookTrail(@RequestBody @Valid List<BookingDto> bookingsDto, @RequestParam("trailId") Long trailId, @RequestParam("eventDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate eventDate);
 
 
-    @Operation(summary = "View booking for a given UUID", responses = {
+    @Operation(summary = "View booking for a given booking Id", responses = {
             @ApiResponse(responseCode = "200", description = "Success"),
-            @ApiResponse(responseCode = "404", description = "Not found: booking for a given UUID does not exist")})
-    @GetMapping(value = "/booking/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Booking> getBookingById(@PathVariable("uuid") Long uuid);
+            @ApiResponse(responseCode = "404", description = "Not found: booking for a given id does not exist")})
+    @GetMapping(value = "/booking/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Booking> getBookingById(@PathVariable("bookingId") Long bookingId);
 
 
     @Operation(summary = "Cancel existing booking", responses = {
             @ApiResponse(responseCode = "200", description = "Success: booking was cancelled"),
             @ApiResponse(responseCode = "400", description = "Bad request: existing booking was not updated"),
-            @ApiResponse(responseCode = "404", description = "Not found: booking for a given UUID does not exist")})
-    @DeleteMapping(value = "/booking/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Booking> cancelBooking(@PathVariable("uuid") Long uuid);
+            @ApiResponse(responseCode = "404", description = "Not found: booking for a given id does not exist")})
+    @DeleteMapping(value = "/booking/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Booking> cancelBooking(@PathVariable("bookingId") Long bookingId);
 
 }

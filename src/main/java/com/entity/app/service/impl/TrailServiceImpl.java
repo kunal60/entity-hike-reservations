@@ -38,7 +38,7 @@ public class TrailServiceImpl implements TrailService {
     public Trail findTrailById(Long trailId) {
         Optional<Trail> booking = trailRepository.findById(trailId);
         if (booking.isEmpty()) {
-            throw new TrailNotAvailableException(String.format("Trail was not found for uuid=%s", trailId));
+            throw new TrailNotAvailableException(String.format("No Trail was found for booking Id:%s", trailId));
         }
         return booking.get();
     }

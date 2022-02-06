@@ -42,8 +42,8 @@ public class BookingController implements BookingApiContractV1 {
     }
 
     @Override
-    public ResponseEntity<Booking> getBookingById(Long pnrNumber) {
-        Optional<Booking> bookingData = Optional.ofNullable(bookingService.findBookingById(pnrNumber));
+    public ResponseEntity<Booking> getBookingById(Long bookingId) {
+        Optional<Booking> bookingData = Optional.ofNullable(bookingService.findBookingById(bookingId));
         if (bookingData.isPresent()) {
             return new ResponseEntity<>(bookingData.get(), HttpStatus.OK);
         } else {
@@ -52,9 +52,9 @@ public class BookingController implements BookingApiContractV1 {
     }
 
     @Override
-    public ResponseEntity<Booking> cancelBooking(Long uuid) {
+    public ResponseEntity<Booking> cancelBooking(Long bookingId) {
         try {
-            Booking booking = bookingService.cancelBooking(uuid);
+            Booking booking = bookingService.cancelBooking(bookingId);
             return new ResponseEntity<>(booking, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

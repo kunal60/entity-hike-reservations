@@ -25,8 +25,8 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional(readOnly = true)
-    public Booking findBookingById(Long uuid) {
-        return bookingRepository.findById(uuid).orElse(null);
+    public Booking findBookingById(Long bookingId) {
+        return bookingRepository.findById(bookingId).orElse(null);
     }
 
 
@@ -52,8 +52,8 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional
-    public Booking cancelBooking(Long uuid) {
-        Booking booking = findBookingById(uuid);
+    public Booking cancelBooking(Long bookingId) {
+        Booking booking = findBookingById(bookingId);
         booking.setStatus(Status.CANCELLED.name());
         booking = bookingRepository.save(booking);
         return booking;

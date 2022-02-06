@@ -10,7 +10,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
+/**
+ * @author Kunal Malhotra
+ */
 @Builder
 @Data
 @AllArgsConstructor
@@ -29,7 +31,6 @@ public class BookingDto {
     @NotEmpty
     @Size(max = 50)
     private String email;
-
 
     @NotNull
     private Integer age;

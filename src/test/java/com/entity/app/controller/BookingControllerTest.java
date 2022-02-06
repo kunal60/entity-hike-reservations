@@ -59,7 +59,7 @@ class BookingControllerTest {
     }
 
     @Test
-    void given_non_existing_trail_uuid_then_status_not_found() {
+    void given_non_existing_trail_id_then_status_not_found() {
         given()
                 .pathParam("trailId", 5)
                 .when().get(controllerPath.concat("/trail") + "/{trailId}")
@@ -149,8 +149,8 @@ class BookingControllerTest {
         void when_booking_Canceled_Then_Status_Ok() {
             long bookingId = getBookingId();
             given()
-                    .pathParam("uuid", bookingId)
-                    .when().delete(controllerPath.concat("/booking") + "/{uuid}")
+                    .pathParam("bookingId", bookingId)
+                    .when().delete(controllerPath.concat("/booking") + "/{bookingId}")
                     .then().statusCode(HttpStatus.OK.value());
         }
 
@@ -163,8 +163,8 @@ class BookingControllerTest {
         void when_booking_Id_Valid_Then_Status_Ok() {
             long bookingId = getBookingId();
             given()
-                    .pathParam("uuid", bookingId)
-                    .when().get(controllerPath.concat("/booking") + "/{uuid}")
+                    .pathParam("bookingId", bookingId)
+                    .when().get(controllerPath.concat("/booking") + "/{bookingId}")
                     .then().statusCode(HttpStatus.OK.value());
         }
 
