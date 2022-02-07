@@ -40,7 +40,7 @@ public class BookingController implements BookingApiContractV1 {
     @Override
     public ResponseEntity<List<Booking>> bookTrail(List<BookingDto> bookingsDto, Long trailId, LocalDate eventDate) {
         Trail trail = trailService.findTrailById(trailId);
-        return new ResponseEntity<>(bookingService.createBookings(bookingsDto, trail, eventDate), HttpStatus.OK);
+        return new ResponseEntity<>(bookingService.createBookings(bookingsDto, trail, eventDate), HttpStatus.CREATED);
     }
 
     @Override

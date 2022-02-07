@@ -37,27 +37,26 @@ public interface BookingApiContractV1 {
 
     @Operation(summary = "View a selected trail", responses = {
             @ApiResponse(responseCode = "200", description = "Success"),
-            @ApiResponse(responseCode = "204", description = "Trail for a given Id does not exist")})
+            @ApiResponse(responseCode = "404", description = "Trail for a given Id does not exist")})
     @GetMapping(value = "/trail/{trailId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Trail> getTrailById(@PathVariable("trailId") Long trailId);
 
-    @Operation(summary = "Book a selected trail for hiking", responses = {
+    @Operation(summary = "Book a selected trail for hiking. Event date should be in this format 2022-02-08", responses = {
             @ApiResponse(responseCode = "201", description = "Created: new booking was added"),
             @ApiResponse(responseCode = "400", description = "Bad request: new booking was not added")})
     @PostMapping(value = "/booking", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Booking>> bookTrail(@RequestBody @Valid List<BookingDto> bookingsDto, @RequestParam("trailId") Long trailId, @RequestParam("eventDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate eventDate);
+    public ResponseEntity<List<Booking>> bookTrail(@RequestBody @Valid List<BookingDto> bookingsDto, @RequestParam("trailId") Long trailId, @RequestParam("eventDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate eventDate);
 
 
-    @Operation(summary = "View booking for a given booking Id", responses = {
+    @Operation(summary = "View booking for a given booking Id. Show bookings for both cancelled and booked", responses = {
             @ApiResponse(responseCode = "200", description = "Success"),
             @ApiResponse(responseCode = "404", description = "Not found: booking for a given id does not exist")})
     @GetMapping(value = "/booking/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Booking> getBookingById(@PathVariable("bookingId") Long bookingId);
 
 
-    @Operation(summary = "Cancel existing booking", responses = {
+    @Operation(summary = "Cancel existing booking. Change Booking status to cancelled", responses = {
             @ApiResponse(responseCode = "200", description = "Success: booking was cancelled"),
-            @ApiResponse(responseCode = "400", description = "Bad request: existing booking was not updated"),
             @ApiResponse(responseCode = "404", description = "Not found: booking for a given id does not exist")})
     @DeleteMapping(value = "/booking/{bookingId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Booking> cancelBooking(@PathVariable("bookingId") Long bookingId);

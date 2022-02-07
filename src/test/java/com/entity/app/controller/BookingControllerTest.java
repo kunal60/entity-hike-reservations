@@ -91,7 +91,7 @@ class BookingControllerTest {
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(bookingsDto)
                     .when().post(controllerPath + "/booking")
-                    .then().statusCode(HttpStatus.OK.value());
+                    .then().statusCode(HttpStatus.CREATED.value());
         }
 
         @Test
@@ -108,7 +108,7 @@ class BookingControllerTest {
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .body(bookingsDto)
                     .when().post(controllerPath + "/booking")
-                    .then().statusCode(HttpStatus.OK.value());
+                    .then().statusCode(HttpStatus.CREATED.value());
         }
 
         @Test
