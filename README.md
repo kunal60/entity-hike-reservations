@@ -81,4 +81,4 @@ Attached in the project root directory
 
 # Exception Handling
 ####Example: Invalid Age of one User
-![Data Published](img/Image4.jpg)
+![Data Published](img/Image4.JPG)
