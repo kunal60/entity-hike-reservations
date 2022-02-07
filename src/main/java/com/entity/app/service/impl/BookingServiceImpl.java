@@ -32,7 +32,7 @@ public class BookingServiceImpl implements BookingService {
         if (bookingData.isPresent()) {
             return bookingData.get();
         }
-        throw new BookingNotFoundException(String.format("Booking not found for bookingId %d", bookingData.get()));
+        throw new BookingNotFoundException(String.format("Booking not found for bookingId %d", bookingId));
     }
 
 
@@ -69,7 +69,7 @@ public class BookingServiceImpl implements BookingService {
         bookingsDto.forEach(booking ->
         {
             if (booking.getAge() < trail.getMinimumAge() || booking.getAge() > trail.getMaximumAge()) {
-                throw new AgeNotValidException(String.format("Booking cancelled because of %s age)", booking.getFirstName() + " " + booking.getLastName() + "'s"));
+                throw new AgeNotValidException(String.format("Booking cancelled because of %s age", booking.getFirstName() + " " + booking.getLastName() + "'s"));
             }
         });
 

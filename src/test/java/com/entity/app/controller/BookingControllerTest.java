@@ -185,8 +185,11 @@ class BookingControllerTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(bookingsDto)
                 .when().post(controllerPath + "/booking").asString();
-        int end = (response.indexOf("customerId\"") + 15) > response.length() ? response.length() - 1 : (response.indexOf("customerId\"") + 15);
-        String output = response.substring(response.indexOf("customerId\"") + 12, end);
+        int bookingIdIndex = response.indexOf("bookingId");
+        int start = bookingIdIndex + 11;
+        int end = bookingIdIndex + 14;
+        end = end > response.length() - 1 ? response.length() - 1 : end;
+        String output = response.substring(start, end);
         long bookingId = Long.valueOf(output.replaceAll("[^a-zA-Z0-9]", ""));
         return bookingId;
     }

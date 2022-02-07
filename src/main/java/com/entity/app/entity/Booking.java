@@ -24,7 +24,7 @@ public class Booking {
     @Id
     @GeneratedValue
     @Column(name = "booking_id")
-    private Long customerId;
+    private Long bookingId;
     /**
      * Holds value of property first name.
      */
