@@ -1,0 +1,102 @@
+{
+	"variables": [],
+	"info": {
+		"name": "element",
+		"_postman_id": "4946a389-055c-34ea-e069-50f2761ccf1f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Book a selected trail for hiking",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/v1/camping/booking?trailId=1&eventDate=2022-02-25",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"camping",
+						"booking"
+					],
+					"query": [
+						{
+							"key": "trailId",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "eventDate",
+							"value": "2022-02-25",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n\t{\r\n\"firstName\": \"M1\",\r\n\"lastName\": \"Malhotra\",\r\n\"email\": \"abc@gmail.com\",\r\n\"age\": 10\r\n}\r\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "View all the trails available for hiking",
+			"request": {
+				"url": "http://localhost:8080/v1/camping/trails",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "View a selected trail",
+			"request": {
+				"url": "http://localhost:8080/v1/camping/trail/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel a booking",
+			"request": {
+				"url": "http://localhost:8080/v1/camping/booking/5",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "View a booking",
+			"request": {
+				"url": "http://localhost:8080/v1/camping/booking/6",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

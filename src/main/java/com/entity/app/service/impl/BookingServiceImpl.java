@@ -10,6 +10,8 @@ import com.entity.app.model.Status;
 import com.entity.app.model.mapper.BookingMapper;
 import com.entity.app.repository.BookingRepository;
 import com.entity.app.service.BookingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,8 @@ import java.util.stream.Collectors;
 @Service
 public class BookingServiceImpl implements BookingService {
 
+    private Logger log = LoggerFactory.getLogger(BookingServiceImpl.class);
+
     @Autowired
     private BookingRepository bookingRepository;
 
@@ -32,6 +36,7 @@ public class BookingServiceImpl implements BookingService {
         if (bookingData.isPresent()) {
             return bookingData.get();
         }
+        log.info(String.format("Booking not found for bookingId %d", bookingId));
         throw new BookingNotFoundException(String.format("Booking not found for bookingId %d", bookingId));
     }
 
@@ -40,6 +45,7 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public List<Booking> createBookings(List<BookingDto> bookingsDto, Trail trail, LocalDate eventDate) {
         if (!isValidEventDate(eventDate)) {
+            log.info("Booking cancelled because event date is wrong");
             throw new BookingInvalidDateException("Booking cancelled because event date should be in this format 2022-02-25 and should be with in the date range within next day and next 30 days");
         }
         validateAge(bookingsDto, trail);
@@ -69,6 +75,7 @@ public class BookingServiceImpl implements BookingService {
         bookingsDto.forEach(booking ->
         {
             if (booking.getAge() < trail.getMinimumAge() || booking.getAge() > trail.getMaximumAge()) {
+                log.info(String.format("Booking cancelled because of %s age", booking.getFirstName() + " " + booking.getLastName() + "'s"));
                 throw new AgeNotValidException(String.format("Booking cancelled because of %s age", booking.getFirstName() + " " + booking.getLastName() + "'s"));
             }
         });

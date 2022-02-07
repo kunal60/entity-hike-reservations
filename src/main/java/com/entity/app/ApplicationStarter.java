@@ -4,6 +4,8 @@ import com.entity.app.model.Trails;
 import com.entity.app.service.TrailService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +21,8 @@ import java.io.InputStream;
 @SpringBootApplication
 public class ApplicationStarter {
 
+    private Logger log = LoggerFactory.getLogger(ApplicationStarter.class);
+
     @Autowired
     private Jackson2ObjectMapperBuilder builder;
 
@@ -32,6 +36,7 @@ public class ApplicationStarter {
     public void init() {
         Trails trails = readJsonFile();
         loadTrailsInDB(trails);
+        log.info("Saved Trail Records in DB");
     }
 
     /**
@@ -40,6 +45,7 @@ public class ApplicationStarter {
      * @return
      */
     private Trails readJsonFile() {
+        log.info("Reading Trail records from Json File");
         ObjectMapper mapper = builder.build();
         TypeReference<Trails> typeReference = new TypeReference<>() {
         };
@@ -48,6 +54,7 @@ public class ApplicationStarter {
         try {
             trails = mapper.readValue(inputStream, typeReference);
         } catch (IOException e) {
+            log.error(e.getMessage());
             e.printStackTrace();
         }
         return trails;
